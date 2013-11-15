@@ -3,13 +3,29 @@
   <script src="http://code.jquery.com/jquery-latest.min.js"></script>
   <script src="JavaScripts/Candlestick.js"></script>
   <script src="index.js"></script>
+  
+  
+  <script type="text/javascript" src="http://www.google.com/jsapi"></script>
+  <script type="text/javascript"> google.load("feeds", "1") //Load Google Ajax Feed API (version 1)</script>
+ 
+  
   <link rel="stylesheet" type="text/css" href="CSS/index.css">
 </head>
 
 <body>
-Ticker:
-<input id="ticker" type="text" name="ticker" value="MA"><a id="go_button" href="#" class="button">Go!</a><br/>
+<p><img src="finance.jpg" width="860" height="200" alt="bild" longdesc="finance.jpg"></p>
+<p>Ticker:
+  <input id="ticker" type="text" name="ticker" value="AAPL">
+  <a id="go_button" href="#" class="button">Search</a><br/>
+</p>
 <div class='history'>&nbsp; </div>
-  <canvas id="myChart" width="660" height="500"></canvas>
+<img src="control.jpg" width="200" height="500" alt="control" longdesc="control.jpg">
+<canvas id="myChart" width="660" height="500"> </canvas>
 </body>
+
+
+
+<div id="feeddiv"></div>
+<script src="newfeeds.js"></script>
+
 </html>

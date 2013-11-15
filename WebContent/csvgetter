@@ -1,0 +1,20 @@
+#!/bin/bash
+#This script will download Financial data of stocks entered on the standard input.
+#The downloaded CSV files will then be imported into MySQL database using mysqlimport tool
+
+#Enter your database parameters here
+DB='kotpho'
+HOST='db.student.chalmers.se'
+USER='kotpho'
+PASS='3kh948T6'
+TAB_PREFIX='yahoodata_'
+
+DB_PARAMS="-u ${USER} -h ${HOST} -p${PASS} ${DB}"
+CREATE="DROP TABLE IF EXISTS ${TAB_PREFIX}_SYMBOL_; CREATE TABLE ${TAB_PREFIX}_SYMBOL_ (day DATE PRIMARY KEY, open DECIMAL(8,3), high DECIMAL(8,3), low DECIMAL(8,3), close DECIMAL(8,3), volume BIGINT, adj_close DECIMAL(8,3))"
+URL='http://ichart.finance.yahoo.com/table.csv?s=_SYMBOL_&d=0&e=25&f=2010&g=d&a=2&b=13&c=1986&ignore=.csv'
+
+while read SYMBOL; do
+  wget -O "${TAB_PREFIX}${SYMBOL}.csv" -q "${URL/_SYMBOL_/$SYMBOL}"
+  mysql -e "${CREATE//_SYMBOL_/$SYMBOL}" ${DB_PARAMS}
+  mysqlimport --columns=day,open,high,low,close,volume,adj_close -L --ignore --fields-terminated-by=, --ignore-lines=1 ${DB_PARAMS} "${TAB_PREFIX}${SYMBOL}.csv"
+done

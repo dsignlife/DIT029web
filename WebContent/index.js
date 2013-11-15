@@ -30,12 +30,12 @@ var refreshChart = function(selector){
       , ['MACD', 12, 26, 9]
     ]
   };
-  $.get("weekly."+ticker+".txt",function(data) {
+  $.get("weekly."+ticker+".csv",function(data) {
     $('.history').html(addHistory(ticker));
     var chart = new Candlestick("myChart",data, options);
     console.log(chart);
   }).fail(function() { 
-    $.get("daily."+ticker+".txt",function(data) {
+    $.get("daily."+ticker+".csv",function(data) {
       $('.history').html(addHistory(ticker));
       options.title = ticker+' daily';
       var chart = new Candlestick("myChart",data, options);
