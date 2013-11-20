@@ -1,5 +1,7 @@
 // each indicator needs to have a unique name in the indicators object
 // the value is an array of the parameters used to define the indicaotr
+
+
 $(function() {
   $('#ticker').focus();
   refreshChart('#ticker');

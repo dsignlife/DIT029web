@@ -1,7 +1,8 @@
+
 var feedcontainer=document.getElementById("feeddiv")
-var feedurl="http://feeds.finance.yahoo.com/rss/2.0/headline?s=AAPL&region=US&lang=en-US"
+var feedurl="http://feeds.finance.yahoo.com/rss/2.0/headline?s="+ticker.value+"&region=US&lang=en-US"
 var feedlimit=5
-var rssoutput="<b>Latest AAPL News:</b><br /><ul>"
+var rssoutput="<b>Latest "+ticker.value+" News:</b><br /><ul>"
 
 function rssfeedsetup(){
 var feedpointer=new google.feeds.Feed(feedurl) //Google Feed API method
